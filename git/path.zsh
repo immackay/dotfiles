@@ -1,0 +1,1 @@
+export GIT=$PROJECTS/Git/

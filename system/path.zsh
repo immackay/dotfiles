@@ -1,0 +1,1 @@
+export PATH="~/.local/bin:/usr/local/sbin:$ZSH/bin:$PATH"

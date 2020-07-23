@@ -1,0 +1,68 @@
+PROJECTS=~/Documents/Workspace
+ZSH="$PROJECTS"/ian/dotfiles
+export ZSH
+export PROJECTS
+
+source ~/.zinit/bin/zinit.zsh
+
+zinit ice
+zinit snippet OMZ::lib/git.zsh
+zinit ice svn wait lucid
+zinit snippet OMZ::plugins/git
+zinit ice svn wait lucid
+zinit snippet OMZ::plugins/gitfast
+
+zinit ice wait lucid atload '_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait lucid blockf
+zinit light zsh-users/zsh-completions
+zinit ice wait lucid
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Stash your private environment variables in ~/.localrc.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+# all of our zsh files
+typeset -U config_files
+config_files=("$ZSH"/**/*.zsh)
+
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}
+do
+  source $file
+done
+
+# load everything but the path and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+do
+  source $file
+done
+
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
+
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}
+do
+  source $file
+done
+
+unset config_files
+
+# Better history
+# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
+export PATH=/Users/ian/.local/bin:$PATH

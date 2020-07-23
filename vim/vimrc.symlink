@@ -1,0 +1,30 @@
+set nocompatible
+syntax on
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugins
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'dracula/vim'
+
+" Colorschemes
+call vundle#end()
+
+set termguicolors
+set t_Co=256
+
+filetype plugin indent on
+
+set enc=utf-8
+set guifont=mononoki:h12
+set number relativenumber
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+let &t_ut=''

@@ -1,0 +1,19 @@
+colorscheme base16-onedark
+addhl global/ number-lines -relative -hlcursor
+
+set-option global aligntab false
+set-option global tabstop 4
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+plug "andreyorst/smarttab.kak" defer smarttab %{
+    set-option global softtabstop 4
+} config %{
+    hook global WinSetOption filetype=(c|cpp|rust|markdown|kak) expandtab
+    hook global WinSetOption filetype=(makefile|gas) noexpandtab
+}
+
+plug "andreyorst/powerline.kak" defer powerline %{
+    powerline_separator curve
+}
+
