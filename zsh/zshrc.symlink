@@ -1,7 +1,7 @@
-PROJECTS=~/Documents/Workspace
-ZSH="$PROJECTS"/ian/dotfiles
-export ZSH
-export PROJECTS
+WORKPLACE=~/workplace
+DOTFILES=~/.dotfiles
+export DOTFILES
+export WORKPLACE
 
 source ~/.zinit/bin/zinit.zsh
 
@@ -27,7 +27,7 @@ fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=("$ZSH"/**/*.zsh)
+config_files=("$DOTFILES"/**/*.zsh)
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
@@ -45,6 +45,12 @@ done
 autoload -U compinit
 compinit
 
+autoload -U bashcompinit
+bashcompinit
+
+#add each topic folder to fpath so that they can add functions and completion scripts
+for topic_folder ($DOTFILES/*) if [ -d $topic_folder ]; then  fpath=($topic_folder $fpath); fi;
+
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
 do
@@ -52,17 +58,3 @@ do
 done
 
 unset config_files
-
-# Better history
-# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
-
-LC_CTYPE=en_US.UTF-8
-LC_ALL=en_US.UTF-8
-
-export PATH=/Users/ian/.local/bin:$PATH

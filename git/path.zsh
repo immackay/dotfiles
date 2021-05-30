@@ -1,1 +1,1 @@
-export GIT=$PROJECTS/Git/
+export GIT=$WORKPLACE/git/

@@ -7,7 +7,7 @@ if [ ! -d "$KAK_DIR" ]; then mkdir -p "$KAK_DIR"; fi
 if [ ! -d "$PLUGIN_DIR" ]; then mkdir -p "$PLUGIN_DIR"; fi
 if [ ! -d "$AUTO_DIR" ]; then mkdir -p "$AUTO_DIR"; fi
 
-cp -R "$ZSH"/kakoune/config/ "$KAK_DIR"
+cp -R "$(pwd -P)/kakoune/config/" "$KAK_DIR"
 
 if [ ! -d "$PLUG_DIR" ]
 then
@@ -17,5 +17,5 @@ fi
 
 if [ ! -h "$AUTO_DIR"/default ]
 then
-  ln -s "$(brew --prefix kakoune)"/share/autoload "$AUTO_DIR"/default
+  ln -s "/usr/share/kak/autoload" "$AUTO_DIR"/default
 fi

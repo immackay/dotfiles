@@ -1,9 +1,20 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
+export EDITOR=$(which kak)
 
-fpath=($ZSH/functions $fpath)
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
-autoload -U $ZSH/functions/*(:t)
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
+fpath=($DOTFILES/functions $fpath)
+
+autoload -U $DOTFILES/functions/*(:t)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -31,9 +42,16 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
+
+eval "$(starship init zsh)"
+
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
