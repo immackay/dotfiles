@@ -15,7 +15,9 @@ default_border pixel 1
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-output eDP-1 resolution 2560x1600 position 2560,0 scale 1.5
+#output eDP-1 resolution --custom 1680x1050 scale 1 subpixel none
+output eDP-1 resolution --custom 3360x2100 scale 2 subpixel none scale_filter linear
+# output eDP-1 resolution 2560x1600 position 2560,0 scale 1
 
 
 ### Idle configuration
